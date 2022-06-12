@@ -1,0 +1,35 @@
+import os
+import requests
+import shutil
+import threading
+id_ = 20700
+def download(id_):
+	directory_name = "Photos_"+str(id_)
+	url = "https://erp.psit.in/assets/img/Simages/"+str(id_)+".jpg"
+	print("Creating Directory")
+	def delete_photos():
+		shutil.rmtree(directory_name)
+		# os.remove("photos.zip")
+
+	try:
+		os.mkdir(directory_name)
+		print("created successfully...")
+	except:
+		print("Directory already present")
+	for i in range(100):
+		#https://erp.psit.in/assets/img/Fimages/823.jpg
+		r = requests.get("https://erp.psit.in/assets/img/Simages/"+str(id_+i)+".jpg")
+		with open("./"+directory_name+"/"+str(id_+i)+".jpg","wb") as f:
+			f.write(r.content)
+			f.close()
+			print(id_+i)
+
+	print("Done!")
+	# shutil.make_archive(directory_name.lower(),'zip',directory_name)
+	# print("Archived")
+	# delete_photos()
+	# print("deleted")
+if __name__=="__main__":
+	for i in range(2):
+		x = threading.Thread(target=download,args=(id_+i*100,))
+		x.start()
