@@ -1,3 +1,4 @@
+# this algo is also used for MAXIMUM SUBARRAY PROBLEM
 def kadane(a):
 	max_current=max_global=a[0]
 	for i in range(1,len(a)):
