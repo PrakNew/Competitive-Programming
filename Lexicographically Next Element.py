@@ -1,5 +1,5 @@
 
-def lexicographicallyNextElement(self, n: int) -> int:
+def lexicographicallyNextElement( n: int) -> int:
     s=list(str(n))
     ind=-1
     for x in range(len(s)-1,0,-1):
